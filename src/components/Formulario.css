@@ -1,0 +1,24 @@
+/* 
+colors
+primary #EDE6DB
+secondary #417D7A
+third #1D5C63
+four #1A3C40
+
+ */
+
+.color-primary-background {
+	background-color: #1a3c40 !important;
+}
+
+.background-secondary-color {
+	background-color: #417d7a;
+}
+
+.text-primary-color {
+	color: #ede6db;
+}
+
+.text-secondary-color {
+	color: #1a3c40;
+}
