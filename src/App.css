@@ -1,0 +1,21 @@
+/* 
+colors
+primary #EDE6DB
+secondary #417D7A
+third #1D5C63
+four #1A3C40
+
+ */
+
+/* Styles general */
+.font-montse {
+	font-family: "Montserrat", sans-serif;
+}
+
+.color-primary-background {
+	background-color: #1a3c40;
+}
+
+.text-primary-color {
+	color: #ede6db;
+}
