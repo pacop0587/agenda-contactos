@@ -22,3 +22,7 @@ four #1A3C40
 .text-secondary-color {
 	color: #1a3c40;
 }
+
+.text-error {
+	color: #e90000;
+}
