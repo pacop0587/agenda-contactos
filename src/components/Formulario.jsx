@@ -1,3 +1,7 @@
+//Firebase
+import db from "../firebase/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+
 //Libraries
 import { useFormik } from "formik";
 import swal from "sweetalert";
@@ -56,6 +60,8 @@ const Formulario = () => {
 	};
 	//OnSubmit Formik
 	const onSubmit = () => {
+		const { nombre, apellido, direccion, email, telefono } = values;
+
 		swal("Contacto Guardado", "", "success");
 	};
 
