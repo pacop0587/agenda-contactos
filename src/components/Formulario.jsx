@@ -1,6 +1,6 @@
 //Firebase
 import db from "../firebase/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 //Libraries
 import { useFormik } from "formik";
@@ -60,9 +60,32 @@ const Formulario = () => {
 	};
 	//OnSubmit Formik
 	const onSubmit = () => {
+		//Guardar datos en firestore
 		const { nombre, apellido, direccion, email, telefono } = values;
 
-		swal("Contacto Guardado", "", "success");
+		const addDatos = async (
+			nombre,
+			apellido,
+			direccion,
+			email,
+			telefono
+		) => {
+			try {
+				const addData = await addDoc(agendaCollection, {
+					nombre,
+					apellido,
+					direccion,
+					email,
+					telefono,
+				});
+
+				swal("Contacto Guardado", "", "success");
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		addDatos(nombre, apellido, direccion, email, telefono);
 	};
 
 	//Variable formik
