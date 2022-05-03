@@ -61,6 +61,7 @@ const Formulario = () => {
 	//OnSubmit Formik
 	const onSubmit = () => {
 		//Guardar datos en firestore
+		const agendaCollection = collection(db, "agenda");
 		const { nombre, apellido, direccion, email, telefono } = values;
 
 		const addDatos = async (

@@ -1,6 +1,7 @@
 import "./App.css";
 //Components
 import Formulario from "./components/Formulario";
+import Contactos from "./components/Contactos";
 
 function App() {
 	return (
@@ -15,7 +16,7 @@ function App() {
 					</div>
 					<div className="col-md-6 col-sm-12">
 						<h2 className="text-center text-primary-color">
-							Lista de contactos
+							<Contactos />
 						</h2>
 					</div>
 				</div>
