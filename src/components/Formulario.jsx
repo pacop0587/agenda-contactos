@@ -1,15 +1,21 @@
-//Firebase
+//Import Firebase
 import db from "../firebase/firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
-//Libraries
+//Import Libraries
 import { useFormik } from "formik";
 import swal from "sweetalert";
 
-//Styles
+//Import Hooks
+import { useContactToggleContext } from "../UseProvider";
+
+//Import Styles
 import "./Formulario.css";
 
 const Formulario = () => {
+	//Funcion que cambia el estado global de contact mediante useContext
+	const stateContact = useContactToggleContext();
+
 	//InitialValues Formik
 	const initialValues = {
 		nombre: "",
@@ -19,7 +25,7 @@ const Formulario = () => {
 		telefono: "",
 	};
 
-	//Validate Formik
+	//Validate form with Formik
 	const validate = (values) => {
 		const errors = {};
 
@@ -87,6 +93,8 @@ const Formulario = () => {
 		};
 
 		addDatos(nombre, apellido, direccion, email, telefono);
+		//Cambiar el state global de contacto
+		stateContact();
 	};
 
 	//Variable formik
@@ -193,7 +201,7 @@ const Formulario = () => {
 				</div>
 				<button
 					type="submit"
-					className="color-primary-background btn text-light mt-2"
+					className="btn btn-primary text-primary-color"
 				>
 					Guardar
 				</button>

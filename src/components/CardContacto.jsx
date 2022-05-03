@@ -1,19 +1,36 @@
-import React from "react";
+import "./CardContacto.css";
 
-const CardContacto = ({ item }) => {
-	const { nombre, apellido, direccion, email, telefono } = item;
+const CardContacto = ({ item, deleteContact }) => {
+	const { id, nombre, apellido, direccion, email, telefono } = item;
 
 	return (
-		<div class="card w-80">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">
-					With supporting text below as a natural lead-in to
-					additional content.
-				</p>
-				<a href="#" class="btn btn-primary">
-					Button
-				</a>
+		<div className="card mt-4 font-montse background-secondary-color">
+			<div className="card-body">
+				<h3 className="card-title text-secondary-color">
+					{nombre} {apellido}
+				</h3>
+				<ul>
+					<li className="card-text fs-5 text-secondary-color ">
+						<span className="fw-bold">Direccion:</span> {direccion}{" "}
+					</li>
+					<li className="card-text fs-5 text-secondary-color">
+						<span className="fw-bold">Email:</span> {email}{" "}
+					</li>
+					<li className="card-text fs-5 text-secondary-color">
+						<span className="fw-bold">Telefono:</span> {telefono}{" "}
+					</li>
+				</ul>
+				<div className="d-flex justify-content-around">
+					<button className="btn background-third-color text-primary-color">
+						Editar
+					</button>
+					<button
+						className="btn background-fourth-color text-primary-color"
+						onClick={() => deleteContact(id)}
+					>
+						Eliminar
+					</button>
+				</div>
 			</div>
 		</div>
 	);

@@ -16,7 +16,7 @@ four #1A3C40
 }
 
 .text-primary-color {
-	color: #ede6db;
+	color: #ede6db !important;
 }
 
 .text-secondary-color {
