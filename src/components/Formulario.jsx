@@ -87,6 +87,13 @@ const Formulario = () => {
 				});
 
 				swal("Contacto Guardado", "", "success");
+				formik.resetForm({
+					nombre: "",
+					apellido: "",
+					direccion: "",
+					email: "",
+					telefono: "",
+				});
 			} catch (error) {
 				console.log(error);
 			}
