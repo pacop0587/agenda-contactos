@@ -1,6 +1,6 @@
 import "./CardContacto.css";
 
-const CardContacto = ({ item, deleteContact }) => {
+const CardContacto = ({ item, deleteContact, editContact }) => {
 	const { id, nombre, apellido, direccion, email, telefono } = item;
 
 	return (
@@ -21,7 +21,10 @@ const CardContacto = ({ item, deleteContact }) => {
 					</li>
 				</ul>
 				<div className="d-flex justify-content-around">
-					<button className="btn background-third-color text-primary-color">
+					<button
+						className="btn background-third-color text-primary-color"
+						onClick={() => editContact(id)}
+					>
 						Editar
 					</button>
 					<button

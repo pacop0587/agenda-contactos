@@ -11,7 +11,7 @@ import db from "../firebase/firebaseConfig";
 //Import Hooks
 import { useContactContext, useContactToggleContext } from "../UseProvider";
 
-const Contactos = () => {
+const Contactos = ({ setEditionContact, setModeEdition }) => {
 	//States
 	const [contactos, setContactos] = useState([]);
 	const stateContact = useContactContext();
@@ -51,6 +51,13 @@ const Contactos = () => {
 		queryDataAgenda();
 		changeStateContact();
 	};
+
+	//Editar contacto
+	const editContact = (id) => {
+		const filterContact = contactos.filter((item) => item.id === id);
+		setEditionContact(filterContact);
+		setModeEdition(true);
+	};
 	return (
 		<div className="p-5">
 			<h2>Contactos</h2>
@@ -59,6 +66,7 @@ const Contactos = () => {
 					key={item.id}
 					item={item}
 					deleteContact={deleteContact}
+					editContact={editContact}
 				/>
 			))}
 		</div>
