@@ -9,12 +9,6 @@ const firebaseConfig = {
 	storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGEBUCKET,
 	messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGINGSENDERID,
 	appId: import.meta.env.VITE_APP_FIREBASE_APPID,
-	// 	apiKey: "AIzaSyBQdrKmKaTev83KsG62PbM27YWB5wk3ptc",
-	// 	authDomain: "crud-agenda-fb874.firebaseapp.com",
-	// 	projectId: "crud-agenda-fb874",
-	// 	storageBucket: "crud-agenda-fb874.appspot.com",
-	// 	messagingSenderId: "634473141280",
-	// 	appId: "1:634473141280:web:b6d9b0294b9232fac39845",
 };
 
 // Initialize Firebase
