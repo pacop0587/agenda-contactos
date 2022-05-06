@@ -26,3 +26,7 @@ four #1A3C40
 .text-error {
 	color: #e90000;
 }
+
+.color-bluehard-background {
+	background-color: #073b73 !important;
+}

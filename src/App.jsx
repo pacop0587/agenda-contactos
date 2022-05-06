@@ -9,8 +9,8 @@ function App() {
 	//States
 	const [editionContact, setEditionContact] = useState({});
 	const [modeEdition, setModeEdition] = useState(false);
-	console.log(editionContact);
-	console.log(modeEdition);
+
+	console.log(`Modo edicion: ${modeEdition}`);
 	return (
 		<UseProvider>
 			<div className="font-montse color-primary-background min-vh-100">
@@ -23,6 +23,7 @@ function App() {
 							<Formulario
 								editionContact={editionContact}
 								modeEdition={modeEdition}
+								setModeEdition={setModeEdition}
 							/>
 						</div>
 						<div className="col-md-6 col-sm-12">

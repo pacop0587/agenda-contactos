@@ -1,6 +1,12 @@
+//--> Start Imports
+
+//Componentes
 import "./CardContacto.css";
 
+//-->End mports
+
 const CardContacto = ({ item, deleteContact, editContact }) => {
+	//Destructuracion de item
 	const { id, nombre, apellido, direccion, email, telefono } = item;
 
 	return (
