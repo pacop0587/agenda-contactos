@@ -73,7 +73,6 @@ const Contactos = ({ setEditionContact, setModeEdition }) => {
 				buttonDelete = false;
 			}
 		});
-		console.log(buttonDelete);
 
 		if (buttonDelete === true) {
 			const contactDoc = doc(db, "agenda", id);
