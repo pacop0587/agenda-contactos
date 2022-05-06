@@ -1,179 +1,257 @@
-//Firebase
-import db from "../firebase/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-
-//Libraries
-import { useFormik } from "formik";
+//Import Libraries
+import { Formik } from "formik";
 import swal from "sweetalert";
+import db from "../firebase/firebaseConfig";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
-//Styles
+//Import Hooks
+import { useContactToggleContext } from "../UseProvider";
+
+//Import Styles
 import "./Formulario.css";
 
-const Formulario = () => {
-	//InitialValues Formik
+const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
+	//Funcion que cambia el estado global de contact mediante useContext
+	const stateContact = useContactToggleContext();
+
+	//Valores iniciales de formik
 	const initialValues = {
-		nombre: "",
 		apellido: "",
 		direccion: "",
 		email: "",
+		id: "",
+		nombre: "",
 		telefono: "",
 	};
 
-	//Validate Formik
-	const validate = (values) => {
-		const errors = {};
+	//Variable y condicion que se ejecuta en caso de realizar una edicion de contacto, en caso de realizar una edicion los valores iniciales del formulario se modifican para que imprima en el formulario los datos del contacto a modificar
+	let editValues = "";
 
-		//Nombre
-		if (!values.nombre) {
-			errors.nombre = "Por favor, ingresa un nombre.";
-		} else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.nombre)) {
-			errors.nombre = "Solo puede contener letras y espacios.";
-		}
-		//Apellido
-		if (!values.apellido) {
-			errors.apellido = "Por favor, ingresa un apellido.";
-		} else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.apellido)) {
-			errors.apellido = "Solo puede contener letras y espacios.";
-		}
-		//Direccion
-		if (!values.direccion) {
-			errors.direccion = "Por favor, ingresa una direccion.";
-		}
-		//Email
-		if (!values.email) {
-			errors.email = "Por favor, ingresa un correo";
-		} else if (
-			!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-				values.email
-			)
-		) {
-			errors.email =
-				"Solo puede contener letras, numeros, puntos y guiones.";
-		}
-		//Telefono
-		if (!values.telefono) {
-			errors.telefono = "Por favor, ingresa un telefono.";
-		} else if (!/^[0-9]+$/.test(values.telefono)) {
-			errors.telefono = "Solo puede contener numeros.";
-		}
-		return errors;
-	};
-	//OnSubmit Formik
-	const onSubmit = () => {
-		const { nombre, apellido, direccion, email, telefono } = values;
+	if (modeEdition) {
+		editValues = {
+			apellido: editionContact[0].apellido,
+			direccion: editionContact[0].direccion,
+			email: editionContact[0].email,
+			id: editionContact[0].id,
+			nombre: editionContact[0].nombre,
+			telefono: editionContact[0].telefono,
+		};
+	}
 
-		swal("Contacto Guardado", "", "success");
-	};
-
-	//Variable formik
-	const formik = useFormik({ initialValues, validate, onSubmit });
-
-	//Destructuracion de formik
-	const { handleSubmit, handleChange, values, errors, touched } = formik;
 	return (
 		<>
-			<h2 className="text-center text-primary-color">Nuevo Contacto</h2>
-			<form
-				className="border rounded p-5 background-secondary-color"
-				onSubmit={handleSubmit}
+			<h2 className="text-center text-primary-color">
+				{modeEdition ? "Editar Contacto" : "Nuevo Contacto"}
+			</h2>
+			<Formik
+				//Valores iniciales y valores de edicion
+				initialValues={editValues || initialValues}
+				//Validacion del formulario
+				validate={(valores) => {
+					let errores = {};
+
+					//Nombre
+					if (!valores.nombre) {
+						errores.nombre = "Por favor, ingresa un nombre.";
+					} else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombre)) {
+						errores.nombre =
+							"Solo puede contener letras y espacios.";
+					}
+					//Apellido
+					if (!valores.apellido) {
+						errores.apellido = "Por favor, ingresa un apellido.";
+					} else if (
+						!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.apellido)
+					) {
+						errores.apellido =
+							"Solo puede contener letras y espacios.";
+					}
+					//Direccion
+					if (!valores.direccion) {
+						errores.direccion = "Por favor, ingresa una direccion.";
+					}
+					//Email
+					if (!valores.email) {
+						errores.email = "Por favor, ingresa un correo";
+					} else if (
+						!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+							valores.email
+						)
+					) {
+						errores.email =
+							"Solo puede contener letras, numeros, puntos y guiones.";
+					}
+					//Telefono
+					if (!valores.telefono) {
+						errores.telefono = "Por favor, ingresa un telefono.";
+					} else if (!/^[0-9]+$/.test(valores.telefono)) {
+						errores.telefono = "Solo puede contener numeros.";
+					}
+					return errores;
+				}}
+				//Guardar nuevo registro o editar registro, dependiendo si esta habilitado el modo edicion
+				onSubmit={(valores, { resetForm }) => {
+					const { nombre, apellido, direccion, email, telefono } =
+						valores;
+
+					if (modeEdition) {
+						const upDatos = async () => {
+							const id = editionContact[0].id;
+							const editData = doc(db, "agenda", id);
+							const data = {
+								nombre,
+								apellido,
+								direccion,
+								email,
+								telefono,
+							};
+							await updateDoc(editData, data);
+							swal("Edicion completada", "", "success");
+							stateContact();
+							resetForm();
+						};
+						upDatos();
+
+						setModeEdition(false);
+						return;
+					} else {
+						const agendaCollection = collection(db, "agenda");
+						const addDatos = async (
+							nombre,
+							apellido,
+							direccion,
+							email,
+							telefono
+						) => {
+							try {
+								const addData = await addDoc(agendaCollection, {
+									nombre,
+									apellido,
+									direccion,
+									email,
+									telefono,
+								});
+
+								swal("Contacto Guardado", "", "success");
+							} catch (error) {
+								console.log(error);
+							}
+						};
+
+						addDatos(nombre, apellido, direccion, email, telefono);
+						//Cambiar el state global de contacto
+						stateContact();
+						resetForm();
+					}
+				}}
+				enableReinitialize
 			>
-				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="form-label text-secondary-color fw-bold"
+				{({ handleSubmit, values, handleChange, errors, touched }) => (
+					<form
+						className="border rounded p-5 background-secondary-color"
+						onSubmit={handleSubmit}
 					>
-						Nombre:
-					</label>
-					<input
-						type="text"
-						className="form-control"
-						name="nombre"
-						value={values.nombre}
-						onChange={handleChange}
-					/>
-					{touched.nombre && errors.nombre && (
-						<div className="text-error">{errors.nombre}</div>
-					)}
-				</div>
-				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="form-label text-secondary-color fw-bold"
-					>
-						Apellido:
-					</label>
-					<input
-						type="text"
-						className="form-control"
-						name="apellido"
-						value={values.apellido}
-						onChange={handleChange}
-					/>
-					{touched.apellido && errors.apellido && (
-						<p className="text-error">{errors.apellido}</p>
-					)}
-				</div>
-				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="form-label text-secondary-color fw-bold"
-					>
-						Direccion:
-					</label>
-					<input
-						type="text"
-						className="form-control"
-						name="direccion"
-						value={values.direccion}
-						onChange={handleChange}
-					/>
-					{touched.direccion && errors.direccion && (
-						<p className="text-error">{errors.direccion}</p>
-					)}
-				</div>
-				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="form-label text-secondary-color fw-bold"
-					>
-						Email:
-					</label>
-					<input
-						type="text"
-						className="form-control"
-						name="email"
-						value={values.email}
-						onChange={handleChange}
-					/>
-					{touched.email && errors.email && (
-						<p className="text-error">{errors.email}</p>
-					)}
-				</div>
-				<div className="mb-3">
-					<label
-						htmlFor=""
-						className="form-label text-secondary-color fw-bold"
-					>
-						Telefono:
-					</label>
-					<input
-						type="text"
-						className="form-control"
-						name="telefono"
-						value={values.telefono}
-						onChange={handleChange}
-					/>
-					{touched.telefono && errors.telefono && (
-						<p className="text-error">{errors.telefono}</p>
-					)}
-				</div>
-				<button
-					type="submit"
-					className="color-primary-background btn text-light mt-2"
-				>
-					Guardar
-				</button>
-			</form>
+						<div className="mb-3">
+							<label
+								htmlFor=""
+								className="form-label text-secondary-color fw-bold"
+							>
+								Nombre:
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="nombre"
+								value={values.nombre}
+								onChange={handleChange}
+							/>
+							{touched.nombre && errors.nombre && (
+								<div className="text-error">
+									{errors.nombre}
+								</div>
+							)}
+						</div>
+						<div className="mb-3">
+							<label
+								htmlFor=""
+								className="form-label text-secondary-color fw-bold"
+							>
+								Apellido:
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="apellido"
+								value={values.apellido}
+								onChange={handleChange}
+							/>
+							{touched.apellido && errors.apellido && (
+								<p className="text-error">{errors.apellido}</p>
+							)}
+						</div>
+						<div className="mb-3">
+							<label
+								htmlFor=""
+								className="form-label text-secondary-color fw-bold"
+							>
+								Direccion:
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="direccion"
+								value={values.direccion}
+								onChange={handleChange}
+							/>
+							{touched.direccion && errors.direccion && (
+								<p className="text-error">{errors.direccion}</p>
+							)}
+						</div>
+						<div className="mb-3">
+							<label
+								htmlFor=""
+								className="form-label text-secondary-color fw-bold"
+							>
+								Email:
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="email"
+								value={values.email}
+								onChange={handleChange}
+							/>
+							{touched.email && errors.email && (
+								<p className="text-error">{errors.email}</p>
+							)}
+						</div>
+						<div className="mb-3">
+							<label
+								htmlFor=""
+								className="form-label text-secondary-color fw-bold"
+							>
+								Telefono:
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="telefono"
+								value={values.telefono}
+								onChange={handleChange}
+							/>
+							{touched.telefono && errors.telefono && (
+								<p className="text-error">{errors.telefono}</p>
+							)}
+						</div>
+						<button
+							type="submit"
+							className="btn btn-primary text-primary-color color-bluehard-background"
+						>
+							{modeEdition ? "Guardar Cambios" : "Nuevo registro"}
+						</button>
+					</form>
+				)}
+			</Formik>
 		</>
 	);
 };
