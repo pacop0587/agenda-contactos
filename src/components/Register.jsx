@@ -1,4 +1,12 @@
+//--> Start Imports
+
+//Formik
 import { Formik } from "formik";
+
+//useContext
+import { useLoginContext } from "../UseProvider";
+
+//-->End Imports
 
 const Register = () => {
 	//Valores iniciales de formik
@@ -6,6 +14,8 @@ const Register = () => {
 		email: "",
 		password: "",
 	};
+
+	const authLogin = useLoginContext();
 
 	return (
 		<div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
@@ -38,7 +48,7 @@ const Register = () => {
 				}}
 				onSubmit={(valores, { resetForm }) => {
 					const { email, password } = valores;
-					console.log(valores);
+					authLogin(email, password);
 
 					resetForm();
 				}}
