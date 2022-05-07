@@ -7,7 +7,7 @@ import CardContacto from "./CardContacto";
 import { useState, useEffect } from "react";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import swal from "sweetalert";
-import db from "../firebase/firebaseConfig";
+import { db } from "../firebase/firebaseConfig";
 
 //Import Hooks
 import { useContactContext, useContactToggleContext } from "../UseProvider";

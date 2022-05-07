@@ -1,7 +1,7 @@
 //Import Libraries
 import { Formik } from "formik";
 import swal from "sweetalert";
-import db from "../firebase/firebaseConfig";
+import { db } from "../firebase/firebaseConfig";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 
 //Import Hooks
