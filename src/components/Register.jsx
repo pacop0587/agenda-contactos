@@ -6,6 +6,12 @@ import { Formik } from "formik";
 //useContext
 import { useLoginContext } from "../UseProvider";
 
+//Sweetalert
+import swal from "sweetalert";
+
+//React Router Dom
+import { useNavigate } from "react-router-dom";
+
 //-->End Imports
 
 const Register = () => {
@@ -15,7 +21,11 @@ const Register = () => {
 		password: "",
 	};
 
+	//Context que manda los datos del registro a firebase auth
 	const authLogin = useLoginContext();
+
+	//Variable para redirigir registro
+	const navigate = useNavigate();
 
 	return (
 		<div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
@@ -46,11 +56,19 @@ const Register = () => {
 
 					return errores;
 				}}
-				onSubmit={(valores, { resetForm }) => {
+				onSubmit={async (valores) => {
 					const { email, password } = valores;
-					authLogin(email, password);
-
-					resetForm();
+					try {
+						await authLogin(email, password);
+						swal({
+							title: "Exito!",
+							text: "Registro realizado",
+							icon: "success",
+						});
+						navigate("/", { replace: true });
+					} catch (error) {
+						console.log(error);
+					}
 				}}
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (
