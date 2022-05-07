@@ -8,8 +8,8 @@ const Login = () => {
 					<h2 className="">Iniciar Sesion</h2>
 					<form action="" className="d-flex flex-column">
 						<div className="mb-3">
-							<label className="form-label">Usuario</label>
-							<input type="text" className="form-control" />
+							<label className="form-label">Email</label>
+							<input type="email" className="form-control" />
 						</div>
 						<div className="mb-3">
 							<label className="form-label">Password</label>
