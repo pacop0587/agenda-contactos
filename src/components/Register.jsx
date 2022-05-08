@@ -1,10 +1,10 @@
-//--> Start Imports
+//----> Start Imports
 
 //Formik
 import { Formik } from "formik";
 
 //useContext
-import { useLoginContext } from "../UseProvider";
+import { useRegisterContext } from "../UseProvider";
 
 //Sweetalert
 import swal from "sweetalert";
@@ -12,8 +12,9 @@ import swal from "sweetalert";
 //React Router Dom
 import { useNavigate } from "react-router-dom";
 
-//-->End Imports
+//---->End Imports
 
+//----> Start Component
 const Register = () => {
 	//Valores iniciales de formik
 	const initialValues = {
@@ -21,8 +22,8 @@ const Register = () => {
 		password: "",
 	};
 
-	//Context que manda los datos del registro a firebase auth
-	const authLogin = useLoginContext();
+	//Context que manda los datos del nuevo usuario a firebase auth
+	const authLogin = useRegisterContext();
 
 	//Variable para redirigir registro
 	const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Register = () => {
 				validate={(valores) => {
 					let errores = {};
 
-					//Email
+					//Email validate
 					if (!valores.email) {
 						errores.email = "Por favor, ingresa un correo";
 					} else if (
@@ -47,6 +48,7 @@ const Register = () => {
 							"Solo puede contener letras, numeros, puntos y guiones.";
 					}
 
+					//Password validate
 					if (!valores.password) {
 						errores.password = "Por favor, ingresa una contreña";
 					} else if (valores.password.length < 8) {
@@ -56,19 +58,25 @@ const Register = () => {
 
 					return errores;
 				}}
-				onSubmit={async (valores) => {
+				onSubmit={(valores) => {
 					const { email, password } = valores;
-					try {
-						await authLogin(email, password);
-						swal({
-							title: "Exito!",
-							text: "Registro realizado",
-							icon: "success",
-						});
-						navigate("/", { replace: true });
-					} catch (error) {
-						console.log(error);
-					}
+					const submitData = async (email, password) => {
+						try {
+							await authLogin(email, password);
+							navigate("/", {
+								replace: true,
+							});
+							swal({
+								title: "Exito!",
+								text: "Registro realizado",
+								icon: "success",
+							});
+						} catch (error) {
+							console.log("Contacto ya usado");
+							console.log(error);
+						}
+					};
+					submitData(email, password);
 				}}
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (

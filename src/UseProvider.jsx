@@ -1,6 +1,6 @@
 //Componente que nos servira para pasar los valores globales por medio de useContext
 
-//--> Start Imports
+//----> Start Imports
 
 //React
 import React from "react";
@@ -10,18 +10,19 @@ import { useState, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 
-//-->End Imports
+//---->End Imports
 
 //Creacion de los contextos para los valores globales
 const contactContext = React.createContext();
 const contactToggleContext = React.createContext();
-const loginContext = React.createContext();
+const registerContext = React.createContext();
 
 //Hooks que serviran para exportarse a los demas componentes
 export const useContactContext = () => useContext(contactContext);
 export const useContactToggleContext = () => useContext(contactToggleContext);
-export const useLoginContext = () => useContext(loginContext);
+export const useRegisterContext = () => useContext(registerContext);
 
+//----> Start Component
 const UseProvider = ({ children }) => {
 	//Estado global que servira para que el useEffect de Contactos.jsx se renderice de acuerdo a las acciones de CRUD
 	const [contact, setContact] = useState(false);
@@ -36,16 +37,16 @@ const UseProvider = ({ children }) => {
 	};
 
 	//Funcion que guardara los datos de la persona que inicio sesion
-	const loginUp = (email, password) => {
+	const registerUp = (email, password) => {
 		createUserWithEmailAndPassword(auth, email, password);
 	};
 
 	return (
 		<contactContext.Provider value={contact}>
 			<contactToggleContext.Provider value={changeStateContact}>
-				<loginContext.Provider value={loginUp}>
+				<registerContext.Provider value={registerUp}>
 					{children}
-				</loginContext.Provider>
+				</registerContext.Provider>
 			</contactToggleContext.Provider>
 		</contactContext.Provider>
 	);
