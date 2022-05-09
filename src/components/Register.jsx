@@ -1,13 +1,20 @@
 //----> Start Imports
 
+//React
+import { useState } from "react";
+
 //Formik
 import { Formik } from "formik";
 
 //useContext
-import { useRegisterContext } from "../UseProvider";
+import { useUserContext } from "../UseProvider";
 
 //Sweetalert
 import swal from "sweetalert";
+
+//Firebase
+import { auth } from "../firebase/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 //React Router Dom
 import { useNavigate } from "react-router-dom";
@@ -16,6 +23,10 @@ import { useNavigate } from "react-router-dom";
 
 //----> Start Component
 const Register = () => {
+	//----> Start States
+	//const [errorRegister, setErrorRegister] = useState("");
+	//----> End States
+
 	//Valores iniciales de formik
 	const initialValues = {
 		email: "",
@@ -23,7 +34,7 @@ const Register = () => {
 	};
 
 	//Context que manda los datos del nuevo usuario a firebase auth
-	const authLogin = useRegisterContext();
+	const { loggedUser, setLoggedUser } = useUserContext();
 
 	//Variable para redirigir registro
 	const navigate = useNavigate();
@@ -58,25 +69,30 @@ const Register = () => {
 
 					return errores;
 				}}
-				onSubmit={(valores) => {
+				onSubmit={async (valores) => {
 					const { email, password } = valores;
-					const submitData = async (email, password) => {
-						try {
-							await authLogin(email, password);
-							navigate("/", {
-								replace: true,
-							});
+					try {
+						await createUserWithEmailAndPassword(
+							auth,
+							email,
+							password
+						);
+						setLoggedUser(email.substring(0, email.indexOf("@")));
+						navigate("/");
+						swal({
+							title: "Exito!",
+							text: "Registro realizado",
+							icon: "success",
+						});
+					} catch (error) {
+						if (error.code === "auth/email-already-in-use") {
 							swal({
-								title: "Exito!",
-								text: "Registro realizado",
-								icon: "success",
+								title: "Error",
+								text: "Este correo ya fue registrado.",
+								icon: "warning",
 							});
-						} catch (error) {
-							console.log("Contacto ya usado");
-							console.log(error);
 						}
-					};
-					submitData(email, password);
+					}
 				}}
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (

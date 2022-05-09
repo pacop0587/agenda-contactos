@@ -1,13 +1,40 @@
+//----> Start Imports
+
 //import UseProvider from "./UseProvider";
+//React
 import { useState } from "react";
+
 //Components
 import Formulario from "../components/Formulario";
 import Contactos from "../components/Contactos";
 
+//Context
+import { useUserContext } from "../UseProvider";
+
+//React Router Dom
+import { useNavigate, Navigate } from "react-router-dom";
+
+//----> End Imports
+
 const index = () => {
-	//States
+	//----> Start States
+
+	//Local
 	const [editionContact, setEditionContact] = useState({});
 	const [modeEdition, setModeEdition] = useState(false);
+
+	//Context
+	const { loggedUser } = useUserContext();
+	//----> End States
+
+	//Variable para redirigir en caso de no estar logueado
+	const navigate = useNavigate();
+
+	if (loggedUser === "") {
+		navigate("/login");
+		return;
+	}
+
 	return (
 		<div className="font-montse color-primary-background min-vh-100">
 			<div className="container">

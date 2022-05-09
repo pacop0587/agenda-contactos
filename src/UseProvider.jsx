@@ -7,7 +7,10 @@ import React from "react";
 import { useState, useContext } from "react";
 
 //Firebase
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 
 //---->End Imports
@@ -15,12 +18,12 @@ import { auth } from "./firebase/firebaseConfig";
 //Creacion de los contextos para los valores globales
 const contactContext = React.createContext();
 const contactToggleContext = React.createContext();
-const registerContext = React.createContext();
+const userContext = React.createContext();
 
 //Hooks que serviran para exportarse a los demas componentes
 export const useContactContext = () => useContext(contactContext);
 export const useContactToggleContext = () => useContext(contactToggleContext);
-export const useRegisterContext = () => useContext(registerContext);
+export const useUserContext = () => useContext(userContext);
 
 //----> Start Component
 const UseProvider = ({ children }) => {
@@ -36,17 +39,15 @@ const UseProvider = ({ children }) => {
 		}
 	};
 
-	//Funcion que guardara los datos de la persona que inicio sesion
-	const registerUp = (email, password) => {
-		createUserWithEmailAndPassword(auth, email, password);
-	};
+	//State que guarda el usuario que inicio sesion
+	const [loggedUser, setLoggedUser] = useState("");
 
 	return (
 		<contactContext.Provider value={contact}>
 			<contactToggleContext.Provider value={changeStateContact}>
-				<registerContext.Provider value={registerUp}>
+				<userContext.Provider value={{ loggedUser, setLoggedUser }}>
 					{children}
-				</registerContext.Provider>
+				</userContext.Provider>
 			</contactToggleContext.Provider>
 		</contactContext.Provider>
 	);
