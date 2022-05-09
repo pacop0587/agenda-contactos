@@ -11,7 +11,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useUserContext } from "../UseProvider";
 
 //React Router Dom
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //----> End Imports
 
@@ -88,6 +88,8 @@ const Login = () => {
 						<button type="submit" className="btn btn-success">
 							Iniciar Sesion
 						</button>
+						<p className="mt-3">¿No tienes cuenta?</p>
+						<Link to="/register">Registrate</Link>
 					</form>
 				</div>
 			</div>
