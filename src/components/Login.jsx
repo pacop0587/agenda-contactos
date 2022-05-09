@@ -35,8 +35,8 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			await signInWithEmailAndPassword(auth, userEmail, userPassword);
-			setLoggedUser({ userEmail });
-			console.log(loggedUser);
+			setLoggedUser(userEmail.substring(0, userEmail.indexOf("@")));
+			navigate("/");
 		} catch (error) {
 			//setErrorLogin(error.code);
 			if (error.code === "auth/user-not-found") {
@@ -52,6 +52,7 @@ const Login = () => {
 					icon: "warning",
 				});
 			}
+			console.log(error);
 		}
 	};
 

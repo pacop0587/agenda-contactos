@@ -7,6 +7,7 @@ import { useState } from "react";
 //Components
 import Formulario from "../components/Formulario";
 import Contactos from "../components/Contactos";
+import Header from "../components/Header";
 
 //Context
 import { useUserContext } from "../UseProvider";
@@ -38,6 +39,7 @@ const index = () => {
 	return (
 		<div className="font-montse color-primary-background min-vh-100">
 			<div className="container">
+				<Header />
 				<h1 className="text-center fw-bold text-primary-color">
 					Agenda de contactos
 				</h1>
