@@ -10,7 +10,11 @@ import swal from "sweetalert";
 import { db } from "../firebase/firebaseConfig";
 
 //Import Hooks
-import { useContactContext, useContactToggleContext } from "../UseProvider";
+import {
+	useContactContext,
+	useContactToggleContext,
+	useUserContext,
+} from "../UseProvider";
 
 //--> End Imports
 
@@ -22,13 +26,16 @@ const Contactos = ({ setEditionContact, setModeEdition }) => {
 	//stateContact cambia true o false cada que se modifica, se elimina y se guarda un contacto nuevo, sirve para que el useEffect este actualizando la lista de contactos.
 	const stateContact = useContactContext();
 
+	//Variable que contiene el nombre del usuario que inicio sesion
+	const { loggedUser } = useUserContext();
+
 	//changeStateContact es una funcion que sirve para modificar el valor del stateContact
 	const changeStateContact = useContactToggleContext();
 
 	//-->End States
 
 	//Funcion que trae todos los contactos que actualmente estan en la base de datos firestore
-	const agendaCollection = collection(db, "agenda");
+	const agendaCollection = collection(db, `agenda-${loggedUser}`);
 	const queryDataAgenda = async () => {
 		const query = await getDocs(agendaCollection);
 		const dataContacts = query.docs.map((doc) => ({
@@ -75,7 +82,7 @@ const Contactos = ({ setEditionContact, setModeEdition }) => {
 		});
 
 		if (buttonDelete === true) {
-			const contactDoc = doc(db, "agenda", id);
+			const contactDoc = doc(db, `agenda-${loggedUser}`, id);
 			await deleteDoc(contactDoc);
 			queryDataAgenda();
 		}

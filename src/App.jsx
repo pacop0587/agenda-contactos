@@ -22,7 +22,7 @@ import { useUserContext } from "./UseProvider";
 const RequireAuth = ({ children }) => {
 	const { loggedUser } = useUserContext();
 	if (!loggedUser) {
-		return <Navigate to="/login" replace={true} />;
+		return <Navigate to="/login" />;
 	}
 	return children;
 };

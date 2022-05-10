@@ -5,7 +5,12 @@ import { useState } from "react";
 
 //Firebase
 import { auth } from "../firebase/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	setPersistence,
+	browserSessionPersistence,
+} from "firebase/auth";
 
 //Context
 import { useUserContext } from "../UseProvider";
@@ -19,7 +24,7 @@ const Login = () => {
 	//----> Start States
 
 	//Context
-	const { login, setLoggedUser } = useUserContext();
+	const { setLoggedUser } = useUserContext();
 
 	//Local
 	const [userEmail, setUserEmail] = useState("");
@@ -34,8 +39,10 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			await setPersistence(auth, "session");
 			await signInWithEmailAndPassword(auth, userEmail, userPassword);
 			setLoggedUser(userEmail.substring(0, userEmail.indexOf("@")));
+
 			navigate("/");
 		} catch (error) {
 			//setErrorLogin(error.code);

@@ -1,18 +1,25 @@
-//Import Libraries
+//----> Start Imports
+
+//Formik
 import { Formik } from "formik";
+//Sweetalert
 import swal from "sweetalert";
+//Firebase
 import { db } from "../firebase/firebaseConfig";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
-
-//Import Hooks
-import { useContactToggleContext } from "../UseProvider";
-
-//Import Styles
+//context
+import { useContactToggleContext, useUserContext } from "../UseProvider";
+//Styles
 import "./Formulario.css";
+
+//----> End Imports
 
 const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 	//Funcion que cambia el estado global de contact mediante useContext
 	const stateContact = useContactToggleContext();
+
+	//Variable que trae el usuario que se encuentre en sesion
+	const { loggedUser } = useUserContext();
 
 	//Valores iniciales de formik
 	const initialValues = {
@@ -97,7 +104,11 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 					if (modeEdition) {
 						const upDatos = async () => {
 							const id = editionContact[0].id;
-							const editData = doc(db, "agenda", id);
+							const editData = doc(
+								db,
+								`agenda-${loggedUser}`,
+								id
+							);
 							const data = {
 								nombre,
 								apellido,
@@ -115,7 +126,10 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 						setModeEdition(false);
 						return;
 					} else {
-						const agendaCollection = collection(db, "agenda");
+						const agendaCollection = collection(
+							db,
+							`agenda-${loggedUser}`
+						);
 						const addDatos = async (
 							nombre,
 							apellido,

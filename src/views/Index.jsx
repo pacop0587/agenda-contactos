@@ -2,7 +2,7 @@
 
 //import UseProvider from "./UseProvider";
 //React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //Components
 import Formulario from "../components/Formulario";
@@ -13,7 +13,11 @@ import Header from "../components/Header";
 import { useUserContext } from "../UseProvider";
 
 //React Router Dom
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+//Firebase
+import { auth } from "../firebase/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 //----> End Imports
 
@@ -25,16 +29,25 @@ const index = () => {
 	const [modeEdition, setModeEdition] = useState(false);
 
 	//Context
-	const { loggedUser } = useUserContext();
+	//const { loggedUser, setLoggedUser } = useUserContext();
 	//----> End States
 
 	//Variable para redirigir en caso de no estar logueado
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	if (loggedUser === "") {
-		navigate("/login");
-		return;
-	}
+	// if (loggedUser === "") {
+	// 	navigate("/login");
+	// 	return;
+	// }
+
+	// useEffect(() => {
+	// 	onAuthStateChanged(auth, (userCurrent) => {
+	// 		//const email = userCurrent.email;
+	// 		setLoggedUser(
+	// 			userCurrent.email.substring(0, userCurrent.email.indexOf("@"))
+	// 		);
+	// 	});
+	// }, []);
 
 	return (
 		<div className="font-montse color-primary-background min-vh-100">
