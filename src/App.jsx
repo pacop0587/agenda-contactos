@@ -1,42 +1,48 @@
+//--> Start Imports
+
+//Styles CSS
 import "./App.css";
+
+//Componets
 import UseProvider from "./UseProvider";
-import { useState } from "react";
-//Components
-import Formulario from "./components/Formulario";
-import Contactos from "./components/Contactos";
+import Index from "./views/Index";
+import Login from "./components/Login";
+import Error404 from "./views/Error404";
+import Register from "./components/Register";
+
+//React Router Dom
+import { Routes, Route, Navigate } from "react-router-dom";
+
+//Context
+import { useUserContext } from "./UseProvider";
+
+//-->End Imports
+
+//Componente que redirige a login en caso de no estar logueado
+const RequireAuth = ({ children }) => {
+	const { loggedUser } = useUserContext();
+	if (!loggedUser) {
+		return <Navigate to="/login" />;
+	}
+	return children;
+};
 
 function App() {
-	//States
-	const [editionContact, setEditionContact] = useState({});
-	const [modeEdition, setModeEdition] = useState(false);
-
-	console.log(`Modo edicion: ${modeEdition}`);
 	return (
 		<UseProvider>
-			<div className="font-montse color-primary-background min-vh-100">
-				<div className="container">
-					<h1 className="text-center fw-bold text-primary-color">
-						Agenda de contactos
-					</h1>
-					<div className="row mt-4">
-						<div className="col-md-6 col-sm-12 p-5">
-							<Formulario
-								editionContact={editionContact}
-								modeEdition={modeEdition}
-								setModeEdition={setModeEdition}
-							/>
-						</div>
-						<div className="col-md-6 col-sm-12">
-							<h2 className="text-center text-primary-color">
-								<Contactos
-									setEditionContact={setEditionContact}
-									setModeEdition={setModeEdition}
-								/>
-							</h2>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<RequireAuth>
+							<Index />
+						</RequireAuth>
+					}
+				/>
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="*" element={<Error404 />} />
+			</Routes>
 		</UseProvider>
 	);
 }
