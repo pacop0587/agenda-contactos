@@ -16,7 +16,7 @@ const Header = () => {
 	//Context para traer el usuario que inicio sesion
 	const { loggedUser, setLoggedUser } = useUserContext();
 
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const logOut = () => {
 		//await signOut(auth);

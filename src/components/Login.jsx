@@ -39,7 +39,6 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await setPersistence(auth, "session");
 			await signInWithEmailAndPassword(auth, userEmail, userPassword);
 			setLoggedUser(userEmail.substring(0, userEmail.indexOf("@")));
 
@@ -59,7 +58,6 @@ const Login = () => {
 					icon: "warning",
 				});
 			}
-			console.log(error);
 		}
 	};
 
