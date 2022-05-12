@@ -95,6 +95,7 @@ span {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
 	font-family: "Montserrat", sans-serif;
 	color: #fff;
@@ -189,4 +190,12 @@ hr {
 
 .text-color-normal {
 	color: #505050;
+}
+
+.text-error {
+	color: #a92210;
+	font-weight: bold;
+	font-size: smaller;
+	position: relative;
+	display: inline-block;
 }
