@@ -1,23 +1,8 @@
-/* 
-colors
-primary #EDE6DB
-secondary #417D7A
-third #1D5C63
-four #1A3C40
-
- */
-
-/* Styles general */
-/* .font-montse {
-	font-family: "Montserrat", sans-serif;
-} */
-
-/* new Styles */
 body,
 .signin {
-	background-color: #d3d3d3 !important;
+	background-color: #d3d3d3;
 	font-family: "Montserrat", sans-serif;
-	color: #fff !important;
+	color: #fff;
 	font-size: 14px;
 	letter-spacing: 1px;
 }
@@ -95,7 +80,6 @@ span {
 }
 
 input[type="text"],
-input[type="email"],
 input[type="password"] {
 	font-family: "Montserrat", sans-serif;
 	color: #fff;
@@ -103,8 +87,8 @@ input[type="password"] {
 
 input {
 	display: inline-block;
-	padding: 15px 10px !important;
-	font-size: 18px !important;
+	padding-top: 20px;
+	font-size: 14px;
 }
 
 h2,
@@ -147,7 +131,7 @@ label {
 }
 
 .signin {
-	background-color: #1161ed !important;
+	background-color: #1161ed;
 	color: #fff;
 	width: 100%;
 	padding: 10px 20px;
@@ -180,22 +164,7 @@ hr {
 	text-align: center;
 	display: block;
 	top: 120px;
-	/* position: relative; */
+	position: relative;
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.2);
-}
-.register Link {
-	text-decoration: none;
-}
-
-.text-color-normal {
-	color: #505050;
-}
-
-.text-error {
-	color: #a92210;
-	font-weight: bold;
-	font-size: smaller;
-	position: relative;
-	display: inline-block;
 }

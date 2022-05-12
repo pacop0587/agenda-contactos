@@ -1,8 +1,5 @@
 //----> Start Imports
 
-//React
-import { useState } from "react";
-
 //Formik
 import { Formik } from "formik";
 
@@ -17,16 +14,12 @@ import { auth } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 //React Router Dom
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 //---->End Imports
 
 //----> Start Component
 const Register = () => {
-	//----> Start States
-	//const [errorRegister, setErrorRegister] = useState("");
-	//----> End States
-
 	//Valores iniciales de formik
 	const initialValues = {
 		email: "",
@@ -40,8 +33,8 @@ const Register = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-			<h2>Registrarse</h2>
+		<div className="d-flex flex-column justify-content-center align-items-center login mt-5">
+			<h2 className="active">Registrarse</h2>
 			<Formik
 				initialValues={initialValues}
 				validate={(valores) => {
@@ -61,7 +54,7 @@ const Register = () => {
 
 					//Password validate
 					if (!valores.password) {
-						errores.password = "Por favor, ingresa una contreña";
+						errores.password = "Por favor, ingresa una contraseña";
 					} else if (valores.password.length < 8) {
 						errores.password =
 							"La contraseña debe tener 8 caracteres como minimo";
@@ -97,36 +90,41 @@ const Register = () => {
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (
 					<form className="mt-4" onSubmit={handleSubmit}>
-						<div className="mb-3">
-							<label className="form-label">Email</label>
+						<>
 							<input
 								type="email"
-								className="form-control"
+								className="text"
 								name="email"
 								value={values.email}
 								onChange={handleChange}
 							/>
+
+							<span>Email</span>
 							{touched.email && errors.email && (
-								<p className="text-danger">{errors.email}</p>
+								<p className="text-error">{errors.email}</p>
 							)}
-						</div>
-						<div className="mb-3">
-							<label className="form-label">Password</label>
+						</>
+						<>
 							<input
 								type="password"
 								name="password"
 								values={values.password}
 								onChange={handleChange}
-								className="form-control"
+								className="text"
 							/>
-							{touched.password && errors.password && (
-								<p className="text-danger">{errors.password}</p>
-							)}
-						</div>
 
-						<button type="submit" className="btn btn-primary">
+							<span>Password</span>
+							{touched.password && errors.password && (
+								<p className="text-error">{errors.password}</p>
+							)}
+						</>
+
+						<button type="submit" className="signin">
 							Guardar
 						</button>
+						<Link to="/login" className="register mt-4">
+							Volver a inicio de sesion
+						</Link>
 					</form>
 				)}
 			</Formik>

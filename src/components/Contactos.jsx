@@ -96,8 +96,8 @@ const Contactos = ({ setEditionContact, setModeEdition }) => {
 		setModeEdition(true);
 	};
 	return (
-		<div className="p-5">
-			<h2>Contactos</h2>
+		<div className="mx-5">
+			<h2 className="text-color-normal">Contactos</h2>
 			{contactos.map((item) => (
 				<CardContacto
 					key={item.id}

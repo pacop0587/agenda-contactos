@@ -27,11 +27,17 @@ const Header = () => {
 	return (
 		<nav className="navbar navbar-expand-lg">
 			<ul className="navbar-brand">
-				<li className="navbar-item text-light">
-					Bienvenido {loggedUser}
+				<li className="navbar-item text-color-normal">
+					Bienvenido{" "}
+					{<p className="d-inline fw-bold">{loggedUser}</p>}
 				</li>
 				<li>
-					<button onClick={logOut}>Cerrar Sesion</button>
+					<button
+						onClick={logOut}
+						className="btn btn-primary navbar-item"
+					>
+						Cerrar Sesion
+					</button>
 				</li>
 			</ul>
 		</nav>

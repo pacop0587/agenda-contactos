@@ -10,31 +10,34 @@ const CardContacto = ({ item, deleteContact, editContact }) => {
 	const { id, nombre, apellido, direccion, email, telefono } = item;
 
 	return (
-		<div className="card mt-4 font-montse background-secondary-color">
+		<div className="card mt-4 background-secondary-color p-2">
 			<div className="card-body">
-				<h3 className="card-title text-secondary-color">
+				<h3 className=" text-form mb-4 ">
 					{nombre} {apellido}
 				</h3>
 				<ul>
-					<li className="card-text fs-5 text-secondary-color ">
-						<span className="fw-bold">Direccion:</span> {direccion}{" "}
+					<li className="text-card-new text-form">
+						<p className="fw-bold">Direccion: </p>
+						<p>{direccion}</p>
 					</li>
-					<li className="card-text fs-5 text-secondary-color">
-						<span className="fw-bold">Email:</span> {email}{" "}
+					<li className="text-card-new text-form ">
+						<p className="fw-bold">Email:</p>
+						<p>{email} </p>
 					</li>
-					<li className="card-text fs-5 text-secondary-color">
-						<span className="fw-bold">Telefono:</span> {telefono}{" "}
+					<li className="text-card-new text-form ">
+						<p className="fw-bold">Telefono:</p>
+						<p>{telefono} </p>
 					</li>
 				</ul>
 				<div className="d-flex justify-content-around">
 					<button
-						className="btn background-third-color text-primary-color"
+						className="btn background-third-color text-form fs-5 "
 						onClick={() => editContact(id)}
 					>
 						Editar
 					</button>
 					<button
-						className="btn background-fourth-color text-primary-color"
+						className="btn background-fourth-color text-form fs-5 "
 						onClick={() => deleteContact(id)}
 					>
 						Eliminar
