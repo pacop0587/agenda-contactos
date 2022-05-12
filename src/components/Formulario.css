@@ -1,0 +1,21 @@
+/* 
+colors
+primary #EDE6DB
+secondary #417D7A
+third #1D5C63
+four #1A3C40
+
+ */
+
+.background-form {
+	background: url() no-repeat center center #505050;
+}
+
+.text-form {
+	color: #d3d3d3 !important;
+}
+
+.text-error {
+	color: #a92210;
+	font-weight: bold;
+}
