@@ -47,7 +47,7 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 
 	return (
 		<>
-			<h2 className="text-center text-primary-color">
+			<h2 className="text-center text-color-normal">
 				{modeEdition ? "Editar Contacto" : "Nuevo Contacto"}
 			</h2>
 			<Formik
@@ -162,19 +162,16 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (
 					<form
-						className="border rounded p-5 background-secondary-color"
+						className="border rounded-3 p-5 background-form shadow-lg"
 						onSubmit={handleSubmit}
 					>
 						<div className="mb-3">
-							<label
-								htmlFor=""
-								className="form-label text-secondary-color fw-bold"
-							>
+							<label htmlFor="" className="text-form fw-bold">
 								Nombre:
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								name="nombre"
 								value={values.nombre}
 								onChange={handleChange}
@@ -186,15 +183,12 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label
-								htmlFor=""
-								className="form-label text-secondary-color fw-bold"
-							>
+							<label htmlFor="" className="text-form fw-bold">
 								Apellido:
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								name="apellido"
 								value={values.apellido}
 								onChange={handleChange}
@@ -204,15 +198,12 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label
-								htmlFor=""
-								className="form-label text-secondary-color fw-bold"
-							>
+							<label htmlFor="" className="text-form fw-bold">
 								Direccion:
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								name="direccion"
 								value={values.direccion}
 								onChange={handleChange}
@@ -222,15 +213,12 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label
-								htmlFor=""
-								className="form-label text-secondary-color fw-bold"
-							>
+							<label htmlFor="" className="c">
 								Email:
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								name="email"
 								value={values.email}
 								onChange={handleChange}
@@ -240,15 +228,12 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label
-								htmlFor=""
-								className="form-label text-secondary-color fw-bold"
-							>
+							<label htmlFor="" className="text-form fw-bold">
 								Telefono:
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								name="telefono"
 								value={values.telefono}
 								onChange={handleChange}
@@ -259,7 +244,7 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 						</div>
 						<button
 							type="submit"
-							className="btn btn-primary text-primary-color color-bluehard-background"
+							className="btn btn-primary text-form color-bluehard-background fs-5"
 						>
 							{modeEdition ? "Guardar Cambios" : "Nuevo registro"}
 						</button>

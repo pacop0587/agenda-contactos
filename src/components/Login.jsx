@@ -18,6 +18,8 @@ import { useUserContext } from "../UseProvider";
 //React Router Dom
 import { useNavigate, Link } from "react-router-dom";
 
+//styles
+
 //----> End Imports
 
 const Login = () => {
@@ -57,45 +59,51 @@ const Login = () => {
 					text: "Password incorrecto",
 					icon: "warning",
 				});
+			} else if (error.code === "auth/invalid-email") {
+				swal({
+					title: "Error",
+					text: "Email incorrecto",
+					icon: "warning",
+				});
 			}
 		}
 	};
 
 	return (
-		<div className="container ">
-			<div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-				<div className=" shadow p-3 mb-5 bg-body rounded">
-					<h2 className="">Iniciar Sesion</h2>
-					<form
-						action=""
-						className="d-flex flex-column"
-						onSubmit={handleSubmit}
-					>
-						<div className="mb-3">
-							<label className="form-label">Email</label>
+		<div className="row">
+			<div className="mt-5 col-12">
+				<div className="login ">
+					<h2 className="active">Iniciar Sesion</h2>
+					<form action="" className="" onSubmit={handleSubmit}>
+						<>
 							<input
 								type="text"
-								className="form-control"
+								className="text"
 								value={userEmail}
 								onChange={(e) => setUserEmail(e.target.value)}
 							/>
-						</div>
-						<div className="mb-3">
-							<label className="form-label">Password</label>
+							<span>Email</span>
+						</>
+						<>
 							<input
 								type="password"
-								className="form-control"
+								className="text"
 								value={userPassword}
 								onChange={(e) =>
 									setUserPassword(e.target.value)
 								}
 							/>
-						</div>
-						<button type="submit" className="btn btn-success">
+							<span>Password</span>
+						</>
+						<button type="submit" className="signin">
 							Iniciar Sesion
 						</button>
-						<p className="mt-3">¿No tienes cuenta?</p>
-						<Link to="/register">Registrate</Link>
+						<div className="mt-4">
+							<p className="register">¿No tienes cuenta?</p>
+							<Link to="/register" className="register">
+								Registrate
+							</Link>
+						</div>
 					</form>
 				</div>
 			</div>

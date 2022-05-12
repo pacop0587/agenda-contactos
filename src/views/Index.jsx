@@ -50,14 +50,14 @@ const index = () => {
 	// }, []);
 
 	return (
-		<div className="font-montse color-primary-background min-vh-100">
+		<div className="font-montse color-primary-background min-vh-100 mw-100">
 			<div className="container">
 				<Header />
-				<h1 className="text-center fw-bold text-primary-color">
+				<h1 className="text-center fw-bold text-color-normal">
 					Agenda de contactos
 				</h1>
-				<div className="row mt-4">
-					<div className="col-md-6 col-sm-12 p-5">
+				<div className="row mt-5">
+					<div className="col-md-6 col-sm-12">
 						<Formulario
 							editionContact={editionContact}
 							modeEdition={modeEdition}

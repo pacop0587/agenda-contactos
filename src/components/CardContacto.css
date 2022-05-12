@@ -7,7 +7,7 @@ li {
 }
 
 .background-secondary-color {
-	background-color: #417d7a !important;
+	background-color: #505050 !important;
 }
 
 .text-primary-color {
@@ -24,4 +24,12 @@ li {
 
 .background-fourth-color {
 	background-color: #ac010a !important;
+}
+
+.text-card-new {
+	font-size: large;
+}
+
+.card-width {
+	max-width: 100%;
 }
