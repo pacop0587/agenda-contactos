@@ -31,7 +31,6 @@ const Login = () => {
 	//Local
 	const [userEmail, setUserEmail] = useState("");
 	const [userPassword, setUserPassword] = useState("");
-	//const [errorLogin, setErrorLogin] = useState("");
 
 	//----> End States
 

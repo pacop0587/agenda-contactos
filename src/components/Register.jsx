@@ -23,10 +23,6 @@ import { useNavigate } from "react-router-dom";
 
 //----> Start Component
 const Register = () => {
-	//----> Start States
-	//const [errorRegister, setErrorRegister] = useState("");
-	//----> End States
-
 	//Valores iniciales de formik
 	const initialValues = {
 		email: "",

@@ -6,14 +6,6 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 
-//Firebase
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "./firebase/firebaseConfig";
-
 //---->End Imports
 
 //Creacion de los contextos para los valores globales
@@ -42,18 +34,6 @@ const UseProvider = ({ children }) => {
 
 	//State que guarda el usuario que inicio sesion
 	const [loggedUser, setLoggedUser] = useState("");
-
-	// useEffect(() => {
-	// 	onAuthStateChanged(auth, (userCurrent) => {
-	// 		//const email = userCurrent.email;
-	// 		setLoggedUser(
-	// 			userCurrent.email.substring(0, userCurrent.email.indexOf("@"))
-	// 		);
-	// 	});
-	// 	console.log("hola");
-	// }, []);
-
-	// console.log("mundo");
 
 	return (
 		<contactContext.Provider value={contact}>

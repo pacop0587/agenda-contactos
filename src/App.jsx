@@ -1,4 +1,4 @@
-//--> Start Imports
+//----> Start Imports
 
 //Styles CSS
 import "./App.css";
@@ -7,7 +7,6 @@ import "./App.css";
 import UseProvider from "./UseProvider";
 import Index from "./views/Index";
 import Login from "./components/Login";
-import Error404 from "./views/Error404";
 import Register from "./components/Register";
 
 //React Router Dom
@@ -16,7 +15,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 //Context
 import { useUserContext } from "./UseProvider";
 
-//-->End Imports
+//---->End Imports
 
 //Componente que redirige a login en caso de no estar logueado
 const RequireAuth = ({ children }) => {
@@ -41,7 +40,6 @@ function App() {
 				/>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</UseProvider>
 	);
