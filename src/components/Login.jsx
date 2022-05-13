@@ -19,7 +19,7 @@ import { useUserContext } from "../UseProvider";
 import { useNavigate, Link } from "react-router-dom";
 
 //styles
-
+import "./Login.css";
 //----> End Imports
 
 const Login = () => {
@@ -69,36 +69,38 @@ const Login = () => {
 	};
 
 	return (
-		<div className="row">
-			<div className="mt-5 col-12">
-				<div className="login ">
-					<h2 className="active">Iniciar Sesion</h2>
-					<form action="" className="" onSubmit={handleSubmit}>
-						<>
+		<div className="vh-100 wh-100 d-flex justify-content-center align-items-center background-color-second px-3">
+			<div className="col-sm-12 col-md-4 background-color-first text-color-first height-200 d-flex flex-column justify-content-center align-items-center p-5 rounded">
+				<div className="">
+					<h2 className="">Iniciar Sesion</h2>
+
+					<form action="" className="mt-4" onSubmit={handleSubmit}>
+						<div className="mb-3">
+							<label className="form-label">Email</label>
 							<input
 								type="text"
-								className="text"
+								className="form-control"
 								value={userEmail}
 								onChange={(e) => setUserEmail(e.target.value)}
 							/>
-							<span>Email</span>
-						</>
-						<>
+						</div>
+						<div className="mb-3">
+							<label className="form-label">Password</label>
 							<input
 								type="password"
-								className="text"
+								className="form-control"
 								value={userPassword}
 								onChange={(e) =>
 									setUserPassword(e.target.value)
 								}
 							/>
-							<span>Password</span>
-						</>
-						<button type="submit" className="signin">
+						</div>
+						<button type="submit" className="btn btn-primary">
 							Iniciar Sesion
 						</button>
-						<div className="mt-4">
-							<p className="register">¿No tienes cuenta?</p>
+						<hr className="mt-5" />
+						<div className="">
+							<p className="">¿No tienes cuenta?</p>
 							<Link to="/register" className="register">
 								Registrate
 							</Link>

@@ -18,7 +18,7 @@ const index = () => {
 	const [modeEdition, setModeEdition] = useState(false);
 
 	return (
-		<div className="font-montse color-primary-background min-vh-100 mw-100">
+		<div className="">
 			<div className="container">
 				<Header />
 				<h1 className="text-center fw-bold text-color-normal">
