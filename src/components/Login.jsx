@@ -69,8 +69,8 @@ const Login = () => {
 	};
 
 	return (
-		<div className="vh-100 wh-100 d-flex justify-content-center align-items-center background-color-second px-3">
-			<div className="col-sm-12 col-md-4 background-color-first text-color-first height-200 d-flex flex-column justify-content-center align-items-center p-5 rounded">
+		<div className="vh-100 mw-100 d-flex justify-content-center align-items-center background-color-second px-3">
+			<div className="col-sm-12 col-md-4 background-color-first text-color-first height-600 d-flex flex-column justify-content-center align-items-center p-5 rounded ">
 				<div className="">
 					<h2 className="">Iniciar Sesion</h2>
 

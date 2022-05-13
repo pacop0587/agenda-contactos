@@ -1,0 +1,32 @@
+.height-600 {
+	height: 600px;
+}
+.background-color-first {
+	background: url() no-repeat center center #505050;
+}
+
+.background-color-second {
+	background-color: #d3d3d3;
+}
+
+.text-color-first {
+	color: #fff;
+}
+
+.register {
+	text-decoration: none;
+	color: grey;
+}
+
+.register:hover {
+	color: #ffff;
+}
+
+h2 {
+	border-bottom: 2px solid #1161ed;
+}
+
+.text-error {
+	color: #a92210;
+	font-weight: bold;
+}
