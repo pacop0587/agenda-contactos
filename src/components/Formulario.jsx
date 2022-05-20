@@ -46,7 +46,9 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 	}
 
 	return (
+
 		<div className="d-flex flex-column">
+
 			<h2 className="text-center text-color-normal">
 				{modeEdition ? "Editar Contacto" : "Nuevo Contacto"}
 			</h2>
@@ -162,6 +164,7 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (
 					<form
+
 						className="border rounded-3 p-5 background-form shadow-lg d-flex flex-column"
 						onSubmit={handleSubmit}
 					>
@@ -186,6 +189,7 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
+
 							<label
 								htmlFor=""
 								className="form-label fw-bold text-light"
@@ -194,7 +198,7 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							</label>
 							<input
 								type="text"
-								className="form-control"
+						    className="form-control"
 								name="apellido"
 								value={values.apellido}
 								onChange={handleChange}
