@@ -46,7 +46,9 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 	}
 
 	return (
-		<>
+
+		<div className="d-flex flex-column">
+
 			<h2 className="text-center text-color-normal">
 				{modeEdition ? "Editar Contacto" : "Nuevo Contacto"}
 			</h2>
@@ -162,16 +164,20 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 			>
 				{({ handleSubmit, values, handleChange, errors, touched }) => (
 					<form
-						className="border rounded-3 p-5 background-form shadow-lg"
+
+						className="border rounded-3 p-5 background-form shadow-lg d-flex flex-column"
 						onSubmit={handleSubmit}
 					>
 						<div className="mb-3">
-							<label htmlFor="" className="text-form fw-bold">
+							<label
+								htmlFor=""
+								className="form-label fw-bold text-light"
+							>
 								Nombre:
 							</label>
 							<input
 								type="text"
-								className="text"
+								className="form-control"
 								name="nombre"
 								value={values.nombre}
 								onChange={handleChange}
@@ -183,12 +189,16 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label htmlFor="" className="text-form fw-bold">
+
+							<label
+								htmlFor=""
+								className="form-label fw-bold text-light"
+							>
 								Apellido:
 							</label>
 							<input
 								type="text"
-								className="text"
+						    className="form-control"
 								name="apellido"
 								value={values.apellido}
 								onChange={handleChange}
@@ -198,12 +208,15 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label htmlFor="" className="text-form fw-bold">
+							<label
+								htmlFor=""
+								className="form-label fw-bold text-light"
+							>
 								Direccion:
 							</label>
 							<input
 								type="text"
-								className="text"
+								className="form-control"
 								name="direccion"
 								value={values.direccion}
 								onChange={handleChange}
@@ -213,12 +226,12 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label htmlFor="" className="c">
+							<label htmlFor="" className="form-label text-light">
 								Email:
 							</label>
 							<input
 								type="text"
-								className="text"
+								className="form-control"
 								name="email"
 								value={values.email}
 								onChange={handleChange}
@@ -228,12 +241,15 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 							)}
 						</div>
 						<div className="mb-3">
-							<label htmlFor="" className="text-form fw-bold">
+							<label
+								htmlFor=""
+								className="form-label fw-bold text-light"
+							>
 								Telefono:
 							</label>
 							<input
 								type="text"
-								className="text"
+								className="form-control"
 								name="telefono"
 								value={values.telefono}
 								onChange={handleChange}
@@ -242,16 +258,13 @@ const Formulario = ({ editionContact, modeEdition, setModeEdition }) => {
 								<p className="text-error">{errors.telefono}</p>
 							)}
 						</div>
-						<button
-							type="submit"
-							className="btn btn-primary text-form color-bluehard-background fs-5"
-						>
+						<button type="submit" className="btn btn-primary fs-5">
 							{modeEdition ? "Guardar Cambios" : "Nuevo registro"}
 						</button>
 					</form>
 				)}
 			</Formik>
-		</>
+		</div>
 	);
 };
 
