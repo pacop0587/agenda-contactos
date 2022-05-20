@@ -11,7 +11,7 @@ const CardContacto = ({ item, deleteContact, editContact }) => {
 
 	return (
 		<div className="card mt-4 background-secondary-color p-2">
-			<div className="card-body">
+			<div className="card-body d-flex flex-column align-items-sm-center">
 				<h3 className=" text-form mb-4 ">
 					{nombre} {apellido}
 				</h3>
